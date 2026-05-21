@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Biodata Calon Siswa – SMKN 3 Soppeng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:    #2563EB;
+      --blue-dk: #1D4ED8;
+      --blue-lt: #EFF6FF;
+      --navy:    #0F172A;
+      --gray:    #64748B;
+      --gray-lt: #94A3B8;
+      --bg:      #F8FAFC;
+      --border:  #E2E8F0;
+      --white:   #FFFFFF;
+      --red:     #EF4444;
+      --green:   #10B981;
+      --yellow:  #F59E0B;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: white;
+    }
+    .nav-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .nav-title strong { display: block; font-size: 13px; font-weight: 800; color: var(--navy); letter-spacing: .3px; }
+    .nav-title span   { font-size: 10px; color: var(--blue); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+    main { flex: 1; padding: 48px 24px 80px; max-width: 960px; margin: 0 auto; width: 100%; }
+
+    .page-header { margin-bottom: 32px; }
+    .page-header h2 { font-size: 24px; font-weight: 800; letter-spacing: .5px; }
+    .page-header p  { font-size: 14px; color: var(--gray); margin-top: 6px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 680px) { .form-grid { grid-template-columns: 1fr; } }
+
+    .field { margin-bottom: 22px; }
+    .field-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .field-label svg { color: var(--blue); flex-shrink: 0; }
+    .field-label .required {
+      color: var(--red);
+      margin-left: 4px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--navy);
+      background: var(--white);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+      resize: none;
+    }
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'><polyline points='6 9 12 15 18 9'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    input[readonly], select[readonly], textarea[readonly] {
+      background: #F1F5F9;
+      cursor: default;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+    }
+    textarea { height: 90px; }
+
+    /* NISN input group dengan tombol CEK */
+    .nisn-group {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .nisn-group input {
+      flex: 1;
+    }
+    .btn-cek {
+      padding: 0 24px;
+      height: 48px;
+      border: none;
+      border-radius: 10px;
+      background: var(--blue);
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background .2s;
+      white-space: nowrap;
+    }
+    .btn-cek:hover:not(:disabled) {
+      background: var(--blue-dk);
+    }
+    .btn-cek:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .info-nisn-hint {
+      font-size: 11px;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+    .loading-cek {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--blue);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .loading-cek .spinner {
+      width: 18px;
+      height: 18px;
+      border: 3px solid #DBEAFE;
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .ekskul-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .ekskul-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .8px;
+      text-transform: uppercase; color: var(--navy);
+    }
+    .ekskul-badge {
+      background: var(--blue); color: var(--white);
+      font-size: 11px; font-weight: 700;
+      border-radius: 999px; padding: 2px 8px;
+    }
+
+    .ekskul-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .ekskul-item {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      cursor: pointer;
+      user-select: none;
+      transition: border-color .18s, background .18s, color .18s;
+      background: var(--white);
+      color: var(--gray);
+      text-align: center;
+    }
+    .ekskul-item:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-lt); }
+    .ekskul-item.selected {
+      border-color: var(--blue);
+      background: var(--blue-lt);
+      color: var(--blue);
+    }
+
+    .error-msg {
+      font-size: 12px; color: var(--red); margin-top: 6px;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+    input.invalid, select.invalid, textarea.invalid {
+      border-color: var(--red);
+    }
+    .ekskul-error { font-size: 12px; color: var(--red); margin-top: 8px; display: none; }
+    .ekskul-error.show { display: block; }
+
+    .submit-wrap { margin-top: 20px; }
+    .btn-submit {
+      width: 100%; padding: 15px;
+      background: var(--blue); color: var(--white);
+      border: none; border-radius: 12px;
+      font-family: inherit; font-size: 14px; font-weight: 800;
+      letter-spacing: .8px; text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(37,99,235,.3);
+    }
+    .btn-submit:hover:not(:disabled) { background: var(--blue-dk); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(37,99,235,.4); }
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      z-index: 200;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      animation: slideIn .3s ease;
+    }
+    .toast.show { display: flex; }
+    .toast.success { background: var(--green); color: white; }
+    .toast.error { background: var(--red); color: white; }
+    .toast.info { background: var(--blue); color: white; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center; padding: 20px;
+      font-size: 12px; color: var(--gray);
+      background: var(--white);
+    }
+
+    @keyframes highlightFlash {
+      0% { background-color: #DBEAFE; border-color: var(--blue); }
+      100% { background-color: #F1F5F9; border-color: var(--border); }
+    }
+    .auto-filled {
+      animation: highlightFlash 0.5s ease;
+    }
+
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+    .loading-overlay.show {
+      display: flex;
+    }
+    .loading-overlay .loading-spinner-lg {
+      width: 54px;
+      height: 54px;
+      border: 5px solid #dbeafe;
+      border-top-color: #2563EB;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 18px;
+    }
+    .loading-overlay .loading-text {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: .3px;
+    }
+    .loading-overlay .loading-subtext {
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 6px;
+    }
+
+    /* MODAL KONFIRMASI BIODATA */
+    .confirm-biodata-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.65);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 20px;
+    }
+    .confirm-biodata-overlay.show {
+      display: flex;
+    }
+    .confirm-biodata-box {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border-radius: 28px;
+      padding: 28px 28px 32px;
+      text-align: center;
+      animation: modalBiodataIn .25s ease;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+    @keyframes modalBiodataIn {
+      from { opacity: 0; transform: translateY(16px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .confirm-biodata-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: #DBEAFE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+    }
+    .confirm-biodata-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .confirm-biodata-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+    .data-preview {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 24px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+    .data-preview-item {
+      display: flex;
+      margin-bottom: 12px;
+      font-size: 13px;
+    }
+    .data-preview-item:last-child { margin-bottom: 0; }
+    .data-preview-label {
+      width: 100px;
+      font-weight: 700;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+    .data-preview-value {
+      color: var(--gray);
+      word-break: break-word;
+      flex: 1;
+    }
+    .confirm-biodata-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .confirm-biodata-btn {
+      flex: 1;
+      border: none;
+      border-radius: 14px;
+      padding: 13px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .confirm-biodata-btn.cancel {
+      background: #F1F5F9;
+      color: var(--gray);
+    }
+    .confirm-biodata-btn.cancel:hover {
+      background: #E2E8F0;
+    }
+    .confirm-biodata-btn.submit {
+      background: var(--blue);
+      color: white;
+    }
+    .confirm-biodata-btn.submit:hover {
+      background: var(--blue-dk);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo">
+      <img src="smkn3soppeng.png" alt="Logo SMKN 3 Soppeng" onerror="this.src='https://placehold.co/200x200?text=Logo'">
+    </div>
+    <div class="nav-title">
+      <strong>SMKN 3 SOPPENG</strong>
+      <span>Tes Bakat dan Minat</span>
+    </div>
+  </a>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h2>BIODATA CALON SISWA</h2>
+    <p>Masukkan NISN, klik CEK untuk memuat data diri secara otomatis.</p>
+  </div>
+
+  <div class="form-grid">
+    <div>
+      <div class="field">
+        <div class="field-label">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4M7 12h6M7 16h2"/>
+          </svg>
+          NISN *
+          <span class="required">(wajib)</span>
+        </div>
+        <div class="nisn-group">
+          <input type="text" id="nisn" placeholder="Masukkan NISN" autocomplete="off" />
+          <button type="button" class="btn-cek" id="btnCek">CEK</button>
+        </div>
+        <div class="info-nisn-hint">🔍 Contoh: 113081286</div>
+        <div class="loading-cek" id="loadingCek" style="display: none;">
+          <div class="spinner"></div>
+          <span>Memvalidasi data siswa...</span>
+        </div>
+        <p class="error-msg" id="err-nisn">NISN tidak ditemukan dalam database.</p>
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          Nama Lengkap
+        </div>
+        <input type="text" id="nama" readonly placeholder="Akan terisi otomatis setelah klik CEK" />
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M20 12v10H4V12M2 5h20v7H2zM12 2v3M8 2h8"/>
+          </svg>
+          Jenis Kelamin
+        </div>
+        <input type="text" id="jk" readonly placeholder="Akan terisi otomatis setelah klik CEK" />
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          Asal Sekolah
+        </div>
+        <input type="text" id="sekolah" readonly placeholder="Akan terisi otomatis setelah klik CEK" />
+      </div>
+
+      <div class="field">
+        <div class="field-label">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          Alamat Lengkap
+        </div>
+        <textarea id="alamat" readonly placeholder="Akan terisi otomatis setelah klik CEK"></textarea>
+      </div>
+    </div>
+
+    <div>
+      <div class="ekskul-header">
+        <span class="ekskul-label">Pilihan Ekstrakurikuler</span>
+        <span class="ekskul-badge">MIN. 1</span>
+      </div>
+
+      <div class="ekskul-grid" id="ekskul-grid">
+        <div class="ekskul-item" data-value="PRAMUKA">PRAMUKA</div>
+        <div class="ekskul-item" data-value="PMR">PMR</div>
+        <div class="ekskul-item" data-value="PKS">PKS</div>
+        <div class="ekskul-item" data-value="PASKIB">PASKIB</div>
+        <div class="ekskul-item" data-value="KORPAL">KORPAL</div>
+        <div class="ekskul-item" data-value="ROHIS">ROHIS</div>
+        <div class="ekskul-item" data-value="ENGLISH CORNER">ENGLISH CORNER</div>
+        <div class="ekskul-item" data-value="PIK-R">PIK-R</div>
+        <div class="ekskul-item" data-value="OLAH RAGA">OLAH RAGA</div>
+        <div class="ekskul-item" data-value="SENI">SENI</div>
+        <div class="ekskul-item" data-value="KIR">KIR</div>
+        <div class="ekskul-item" data-value="PANDU DIGITAL">PANDU DIGITAL</div>
+      </div>
+      <p class="ekskul-error" id="err-ekskul">Pilih minimal 1 ekstrakurikuler.</p>
+
+      <div class="submit-wrap">
+        <button class="btn-submit" id="btnMulai" disabled>
+          <span id="btnText">Mulai Tes</span>
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 SMKN 3 SOPPENG</p>
+  <p style="margin-top:2px;">
+    Develop by 
+    <a href="https://www.instagram.com/scoyamm812" target="_blank" style="color:#2563EB; text-decoration:none; font-weight:600;">
+      @scoyamm812
+    </a>
+  </p>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner-lg"></div>
+  <div class="loading-text">Memeriksa data...</div>
+  <div class="loading-subtext">Mohon tunggu sebentar</div>
+</div>
+
+<!-- MODAL KONFIRMASI BIODATA -->
+<div class="confirm-biodata-overlay" id="confirmBiodataModal">
+  <div class="confirm-biodata-box">
+    <div class="confirm-biodata-icon">📋</div>
+    <div class="confirm-biodata-title">Konfirmasi Biodata</div>
+    <div class="confirm-biodata-desc">Pastikan data diri Anda sudah benar sebelum melanjutkan ke tes.</div>
+
+    <div class="data-preview" id="dataPreview">
+      <div class="data-preview-item">
+        <span class="data-preview-label">Nama:</span>
+        <span class="data-preview-value" id="previewNama">-</span>
+      </div>
+      <div class="data-preview-item">
+        <span class="data-preview-label">NISN:</span>
+        <span class="data-preview-value" id="previewNisn">-</span>
+      </div>
+      <div class="data-preview-item">
+        <span class="data-preview-label">JK:</span>
+        <span class="data-preview-value" id="previewJk">-</span>
+      </div>
+      <div class="data-preview-item">
+        <span class="data-preview-label">Asal Sekolah:</span>
+        <span class="data-preview-value" id="previewSekolah">-</span>
+      </div>
+      <div class="data-preview-item">
+        <span class="data-preview-label">Alamat:</span>
+        <span class="data-preview-value" id="previewAlamat">-</span>
+      </div>
+      <div class="data-preview-item">
+        <span class="data-preview-label">Ekskul:</span>
+        <span class="data-preview-value" id="previewEkskul">-</span>
+      </div>
+    </div>
+
+    <div class="confirm-biodata-actions">
+      <button class="confirm-biodata-btn cancel" id="cancelConfirmBtn">Kembali</button>
+      <button class="confirm-biodata-btn submit" id="confirmSubmitBtn">Ya, Lanjutkan Tes</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ==================== KONFIGURASI ====================
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzmCnxUzQWFP63T9J8oDHfJtvYEHfj79_JUVtsr87n644KpEDaUrRgSjV5QMvR7YCKqiw/exec";
+  
+  let selectedEkskul = new Set();
+  let currentStudentData = null;
+  let isNisnValid = false;
+
+  function showToast(message, type = "success") {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = `toast ${type} show`;
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  function addAutoFillAnimation(elementId) {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.classList.add('auto-filled');
+      setTimeout(() => el.classList.remove('auto-filled'), 500);
+    }
+  }
+
+  // ==================== CEK NISN ====================
+  async function cekNisn() {
+    const nisnInput = document.getElementById('nisn');
+    const nisn = nisnInput.value.trim();
+    const btnCek = document.getElementById('btnCek');
+    const loadingCek = document.getElementById('loadingCek');
+    const btnMulai = document.getElementById('btnMulai');
+
+    if (!nisn) {
+      showToast("❌ Masukkan NISN terlebih dahulu", "error");
+      return;
+    }
+
+    isNisnValid = false;
+    currentStudentData = null;
+    btnMulai.disabled = true;
+
+    loadingCek.style.display = "flex";
+    btnCek.disabled = true;
+    btnCek.textContent = "CEK...";
+
+    try {
+      console.log("Mengecek NISN:", nisn);
+      const response = await fetch(`${APPS_SCRIPT_URL}?action=getStudent&nisn=${encodeURIComponent(nisn)}`);
+      const result = await response.json();
+
+      console.log("Cek NISN response:", result);
+
+      if (result.status === true && result.data) {
+        const siswa = result.data;
+        currentStudentData = siswa;
+        isNisnValid = true;
+
+        document.getElementById('nama').value = siswa.nama || "";
+        document.getElementById('jk').value = siswa.jk || "";
+        document.getElementById('sekolah').value = siswa.sekolah || "";
+        document.getElementById('alamat').value = siswa.alamat || "";
+
+        addAutoFillAnimation('nama');
+        addAutoFillAnimation('jk');
+        addAutoFillAnimation('sekolah');
+        addAutoFillAnimation('alamat');
+
+        document.getElementById('err-nisn').classList.remove('show');
+        document.getElementById('nisn').classList.remove('invalid');
+        
+        if (selectedEkskul.size > 0) {
+          btnMulai.disabled = false;
+        }
+        
+        showToast(`✅ Data ditemukan: ${siswa.nama}`, "success");
+      } else {
+        currentStudentData = null;
+        isNisnValid = false;
+        
+        document.getElementById('nama').value = "";
+        document.getElementById('jk').value = "";
+        document.getElementById('sekolah').value = "";
+        document.getElementById('alamat').value = "";
+        
+        document.getElementById('err-nisn').classList.add('show');
+        document.getElementById('nisn').classList.add('invalid');
+        document.getElementById('err-nisn').textContent = "NISN tidak terdaftar dalam database";
+        
+        btnMulai.disabled = true;
+        showToast(`❌ NISN ${nisn} tidak terdaftar`, "error");
+      }
+    } catch (err) {
+      console.error("Cek NISN error:", err);
+      showToast("❌ Gagal menghubungi server. Periksa koneksi internet.", "error");
+      currentStudentData = null;
+      isNisnValid = false;
+      btnMulai.disabled = true;
+    } finally {
+      loadingCek.style.display = "none";
+      btnCek.disabled = false;
+      btnCek.textContent = "CEK";
+    }
+  }
+
+  // ==================== VALIDASI SEBELUM SUBMIT ====================
+  function validateBeforeConfirm() {
+    if (!isNisnValid || !currentStudentData) {
+      showToast("❌ Silakan CEK NISN terlebih dahulu", "error");
+      return false;
+    }
+
+    if (selectedEkskul.size === 0) {
+      document.getElementById('err-ekskul').classList.add('show');
+      showToast("❌ Pilih minimal 1 ekstrakurikuler", "error");
+      return false;
+    } else {
+      document.getElementById('err-ekskul').classList.remove('show');
+    }
+
+    return true;
+  }
+
+  // ==================== MODAL KONFIRMASI ====================
+  function openConfirmModal() {
+    const nama = document.getElementById('nama').value.trim() || "-";
+    const nisn = document.getElementById('nisn').value.trim();
+    const jk = document.getElementById('jk').value.trim() || "-";
+    const sekolah = document.getElementById('sekolah').value.trim() || "-";
+    const alamat = document.getElementById('alamat').value.trim() || "-";
+    const ekskulList = Array.from(selectedEkskul).join(", ");
+
+    document.getElementById('previewNama').textContent = nama;
+    document.getElementById('previewNisn').textContent = nisn || "-";
+    document.getElementById('previewJk').textContent = jk;
+    document.getElementById('previewSekolah').textContent = sekolah;
+    document.getElementById('previewAlamat').textContent = alamat;
+    document.getElementById('previewEkskul').textContent = ekskulList || "-";
+
+    document.getElementById('confirmBiodataModal').classList.add('show');
+  }
+
+  function closeConfirmModal() {
+    document.getElementById('confirmBiodataModal').classList.remove('show');
+  }
+
+  // ==================== SUBMIT BIODATA ====================
+  async function mulaiTes() {
+    const btnMulai = document.getElementById('btnMulai');
+    const btnText = document.getElementById('btnText');
+    const originalText = btnText.innerHTML;
+    
+    if (!isNisnValid || !currentStudentData) {
+      showToast("❌ Silakan CEK NISN terlebih dahulu", "error");
+      return;
+    }
+
+    if (selectedEkskul.size === 0) {
+      document.getElementById('err-ekskul').classList.add('show');
+      showToast("❌ Pilih minimal 1 ekstrakurikuler", "error");
+      return;
+    }
+
+    btnMulai.disabled = true;
+    btnText.innerHTML = '<span class="loading-spinner"></span> Menyimpan data...';
+
+    const nisn = document.getElementById('nisn').value.trim();
+    const ekskulArray = Array.from(selectedEkskul);
+
+    const payload = {
+      action: "saveBiodata",
+      nisn: nisn,
+      ekskul: ekskulArray
+    };
+
+    try {
+      console.log("Mengirim data ke backend:", payload);
+
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      // Karena mode no-cors, response tidak bisa dibaca
+      // Kita asumsikan berhasil jika tidak ada error network
+      console.log("Data terkirim (mode no-cors)");
+      
+      // Simpan data ke localStorage untuk sementara
+      localStorage.setItem("biodataSubmitted", "true");
+      localStorage.setItem("namaSiswa", currentStudentData.nama);
+      localStorage.setItem("nisnSiswa", nisn);
+      localStorage.setItem("jkSiswa", currentStudentData.jk);
+      
+      // ID tes sementara
+      const tempId = "TES" + Date.now();
+      localStorage.setItem("idTes", tempId);
+      
+      showToast("✅ Data berhasil disimpan! Mengarahkan ke halaman tes...", "success");
+      
+      setTimeout(() => {
+        window.location.href = "testbakat.html";
+      }, 1500);
+      
+    } catch (error) {
+      console.error("Error:", error);
+      showToast("❌ Gagal menyimpan data: " + error.message, "error");
+      btnMulai.disabled = false;
+      btnText.innerHTML = originalText;
+    }
+  }
+
+  // ==================== CEK TES SUDAH PERNAH DIKERJAKAN ====================
+  function checkPreviousSubmission() {
+    if (localStorage.getItem("tesSelesai") === "true") {
+      const nama = localStorage.getItem("namaSiswa") || "Siswa";
+      alert(`${nama}, Anda sudah menyelesaikan tes bakat dan tidak dapat mengerjakan ulang.`);
+      window.location.href = "index.html";
+      return true;
+    }
+
+    if (localStorage.getItem("biodataSubmitted") === "true") {
+      const namaTersimpan = localStorage.getItem("namaSiswa");
+      if (namaTersimpan && confirm(`Halo ${namaTersimpan}, Anda sudah mengisi biodata.\nLanjutkan ke tes?`)) {
+        window.location.href = "testbakat.html";
+        return true;
+      } else {
+        localStorage.removeItem("biodataSubmitted");
+      }
+    }
+    return false;
+  }
+
+  // ==================== UPDATE SUBMIT BUTTON STATUS ====================
+  function updateSubmitButton() {
+    const btnMulai = document.getElementById('btnMulai');
+    if (isNisnValid && selectedEkskul.size > 0) {
+      btnMulai.disabled = false;
+    } else {
+      btnMulai.disabled = true;
+    }
+  }
+
+  // ==================== INIT EKSTRAKURIKULER ====================
+  function initEkskulToggle() {
+    document.querySelectorAll('.ekskul-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const val = item.dataset.value;
+        if (selectedEkskul.has(val)) {
+          selectedEkskul.delete(val);
+          item.classList.remove('selected');
+        } else {
+          selectedEkskul.add(val);
+          item.classList.add('selected');
+        }
+        
+        if (selectedEkskul.size > 0) {
+          document.getElementById('err-ekskul').classList.remove('show');
+        }
+        
+        updateSubmitButton();
+      });
+    });
+  }
+
+  // ==================== INIT EVENT LISTENERS ====================
+  function initEventListeners() {
+    document.getElementById("btnCek").addEventListener("click", cekNisn);
+    
+    const nisnInput = document.getElementById("nisn");
+    nisnInput.addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        cekNisn();
+      }
+    });
+
+    document.getElementById("btnMulai").addEventListener("click", function(e) {
+      e.preventDefault();
+      if (validateBeforeConfirm()) {
+        openConfirmModal();
+      }
+    });
+    
+    document.getElementById("cancelConfirmBtn").addEventListener("click", closeConfirmModal);
+    
+    document.getElementById("confirmSubmitBtn").addEventListener("click", function() {
+      closeConfirmModal();
+      mulaiTes();
+    });
+  }
+
+  // ==================== INITIALISASI ====================
+  async function init() {
+    const overlay = document.getElementById("loadingOverlay");
+    overlay.classList.add("show");
+    
+    const isRedirected = checkPreviousSubmission();
+    if (isRedirected) return;
+    
+    initEventListeners();
+    initEkskulToggle();
+    
+    setTimeout(() => {
+      overlay.classList.remove("show");
+    }, 500);
+  }
+  
+  init();
+</script>
+</body>
+</html>
