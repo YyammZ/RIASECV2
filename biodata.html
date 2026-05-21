@@ -119,10 +119,8 @@
       background-repeat: no-repeat;
       background-position: right 14px center;
     }
-    input[readonly], select[readonly], textarea[readonly] {
-      background: #F1F5F9;
-      cursor: default;
-    }
+    textarea { height: 90px; }
+
     input[type="text"]:focus,
     input[type="number"]:focus,
     select:focus,
@@ -130,7 +128,6 @@
       border-color: var(--blue);
       box-shadow: 0 0 0 3px rgba(37,99,235,.12);
     }
-    textarea { height: 90px; }
 
     /* NISN input group dengan tombol CEK */
     .nisn-group {
@@ -494,7 +491,7 @@
           <div class="spinner"></div>
           <span>Memvalidasi data siswa...</span>
         </div>
-        <p class="error-msg" id="err-nisn">NISN tidak ditemukan dalam database.</p>
+        <p class="error-msg" id="err-nisn">NISN tidak ditemukan dalam database. Silakan isi manual.</p>
       </div>
 
       <div class="field">
@@ -502,9 +499,10 @@
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
           </svg>
-          Nama Lengkap
+          Nama Lengkap *
         </div>
-        <input type="text" id="nama" readonly placeholder="Akan terisi otomatis setelah klik CEK" />
+        <input type="text" id="nama" placeholder="Isi nama lengkap" />
+        <p class="error-msg" id="err-nama">Nama lengkap wajib diisi.</p>
       </div>
 
       <div class="field">
@@ -514,7 +512,7 @@
           </svg>
           Jenis Kelamin
         </div>
-        <input type="text" id="jk" readonly placeholder="Akan terisi otomatis setelah klik CEK" />
+        <input type="text" id="jk" placeholder="L / P" />
       </div>
 
       <div class="field">
@@ -522,9 +520,10 @@
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M3 9l9-6 9 6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
-          Asal Sekolah
+          Asal Sekolah *
         </div>
-        <input type="text" id="sekolah" readonly placeholder="Akan terisi otomatis setelah klik CEK" />
+        <input type="text" id="sekolah" placeholder="Asal sekolah" />
+        <p class="error-msg" id="err-sekolah">Asal sekolah wajib diisi.</p>
       </div>
 
       <div class="field">
@@ -532,9 +531,10 @@
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
-          Alamat Lengkap
+          Alamat Lengkap *
         </div>
-        <textarea id="alamat" readonly placeholder="Akan terisi otomatis setelah klik CEK"></textarea>
+        <textarea id="alamat" placeholder="Alamat lengkap"></textarea>
+        <p class="error-msg" id="err-alamat">Alamat lengkap wajib diisi.</p>
       </div>
     </div>
 
@@ -561,8 +561,8 @@
       <p class="ekskul-error" id="err-ekskul">Pilih minimal 1 ekstrakurikuler.</p>
 
       <div class="submit-wrap">
-        <button class="btn-submit" id="btnMulai" disabled>
-          <span id="btnText">Mulai Tes</span>
+        <button class="btn-submit" id="btnMulaiTes">
+          <span>Mulai Tes</span>
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
@@ -633,7 +633,7 @@
 
 <script>
   // ==================== KONFIGURASI ====================
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzmCnxUzQWFP63T9J8oDHfJtvYEHfj79_JUVtsr87n644KpEDaUrRgSjV5QMvR7YCKqiw/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzsavrEPPh5dZkobc8UGOXu2QHrKN_x-7agKIJM5z13v85Vr2ekX6h0MkL8YwjTTtPuAA/exec";
   
   let selectedEkskul = new Set();
   let currentStudentData = null;
@@ -662,7 +662,6 @@
     const nisn = nisnInput.value.trim();
     const btnCek = document.getElementById('btnCek');
     const loadingCek = document.getElementById('loadingCek');
-    const btnMulai = document.getElementById('btnMulai');
 
     if (!nisn) {
       showToast("❌ Masukkan NISN terlebih dahulu", "error");
@@ -671,7 +670,6 @@
 
     isNisnValid = false;
     currentStudentData = null;
-    btnMulai.disabled = true;
 
     loadingCek.style.display = "flex";
     btnCek.disabled = true;
@@ -702,33 +700,21 @@
         document.getElementById('err-nisn').classList.remove('show');
         document.getElementById('nisn').classList.remove('invalid');
         
-        if (selectedEkskul.size > 0) {
-          btnMulai.disabled = false;
-        }
-        
         showToast(`✅ Data ditemukan: ${siswa.nama}`, "success");
       } else {
-        currentStudentData = null;
         isNisnValid = false;
-        
-        document.getElementById('nama').value = "";
-        document.getElementById('jk').value = "";
-        document.getElementById('sekolah').value = "";
-        document.getElementById('alamat').value = "";
+        currentStudentData = null;
         
         document.getElementById('err-nisn').classList.add('show');
         document.getElementById('nisn').classList.add('invalid');
-        document.getElementById('err-nisn').textContent = "NISN tidak terdaftar dalam database";
         
-        btnMulai.disabled = true;
-        showToast(`❌ NISN ${nisn} tidak terdaftar`, "error");
+        showToast(`⚠️ NISN ${nisn} tidak terdaftar. Silakan isi data manual.`, "info");
       }
     } catch (err) {
       console.error("Cek NISN error:", err);
       showToast("❌ Gagal menghubungi server. Periksa koneksi internet.", "error");
-      currentStudentData = null;
       isNisnValid = false;
-      btnMulai.disabled = true;
+      currentStudentData = null;
     } finally {
       loadingCek.style.display = "none";
       btnCek.disabled = false;
@@ -736,101 +722,142 @@
     }
   }
 
-  // ==================== VALIDASI SEBELUM SUBMIT ====================
-  function validateBeforeConfirm() {
-    if (!isNisnValid || !currentStudentData) {
-      showToast("❌ Silakan CEK NISN terlebih dahulu", "error");
-      return false;
+  // ==================== VALIDASI FORM ====================
+  function validateForm() {
+    const nama = document.getElementById('nama').value.trim();
+    const sekolah = document.getElementById('sekolah').value.trim();
+    const alamat = document.getElementById('alamat').value.trim();
+    
+    let isValid = true;
+    
+    if (!nama) {
+      document.getElementById('err-nama').classList.add('show');
+      document.getElementById('nama').classList.add('invalid');
+      isValid = false;
+    } else {
+      document.getElementById('err-nama').classList.remove('show');
+      document.getElementById('nama').classList.remove('invalid');
     }
+    
+    if (!sekolah) {
+      document.getElementById('err-sekolah').classList.add('show');
+      document.getElementById('sekolah').classList.add('invalid');
+      isValid = false;
+    } else {
+      document.getElementById('err-sekolah').classList.remove('show');
+      document.getElementById('sekolah').classList.remove('invalid');
+    }
+    
+    if (!alamat) {
+      document.getElementById('err-alamat').classList.add('show');
+      document.getElementById('alamat').classList.add('invalid');
+      isValid = false;
+    } else {
+      document.getElementById('err-alamat').classList.remove('show');
+      document.getElementById('alamat').classList.remove('invalid');
+    }
+    
+    return isValid;
+  }
 
+  // ==================== VALIDASI EKSKUL ====================
+  function validateEkskul() {
     if (selectedEkskul.size === 0) {
       document.getElementById('err-ekskul').classList.add('show');
-      showToast("❌ Pilih minimal 1 ekstrakurikuler", "error");
       return false;
     } else {
       document.getElementById('err-ekskul').classList.remove('show');
+      return true;
     }
-
-    return true;
   }
 
-  // ==================== MODAL KONFIRMASI ====================
-  function openConfirmModal() {
-    const nama = document.getElementById('nama').value.trim() || "-";
+  // ==================== SHOW KONFIRMASI MODAL ====================
+  function showConfirmModal() {
+    // Ambil data dari form
     const nisn = document.getElementById('nisn').value.trim();
-    const jk = document.getElementById('jk').value.trim() || "-";
-    const sekolah = document.getElementById('sekolah').value.trim() || "-";
-    const alamat = document.getElementById('alamat').value.trim() || "-";
-    const ekskulList = Array.from(selectedEkskul).join(", ");
-
-    document.getElementById('previewNama').textContent = nama;
-    document.getElementById('previewNisn').textContent = nisn || "-";
-    document.getElementById('previewJk').textContent = jk;
-    document.getElementById('previewSekolah').textContent = sekolah;
-    document.getElementById('previewAlamat').textContent = alamat;
-    document.getElementById('previewEkskul').textContent = ekskulList || "-";
-
-    document.getElementById('confirmBiodataModal').classList.add('show');
-  }
-
-  function closeConfirmModal() {
-    document.getElementById('confirmBiodataModal').classList.remove('show');
-  }
-
-  // ==================== SUBMIT BIODATA ====================
-  async function mulaiTes() {
-    const btnMulai = document.getElementById('btnMulai');
-    const btnText = document.getElementById('btnText');
-    const originalText = btnText.innerHTML;
-    
-    if (!isNisnValid || !currentStudentData) {
-      showToast("❌ Silakan CEK NISN terlebih dahulu", "error");
-      return;
-    }
-
-    if (selectedEkskul.size === 0) {
-      document.getElementById('err-ekskul').classList.add('show');
-      showToast("❌ Pilih minimal 1 ekstrakurikuler", "error");
-      return;
-    }
-
-    btnMulai.disabled = true;
-    btnText.innerHTML = '<span class="loading-spinner"></span> Menyimpan data...';
-
-    const nisn = document.getElementById('nisn').value.trim();
+    const nama = document.getElementById('nama').value.trim();
+    const jk = document.getElementById('jk').value.trim();
+    const sekolah = document.getElementById('sekolah').value.trim();
+    const alamat = document.getElementById('alamat').value.trim();
     const ekskulArray = Array.from(selectedEkskul);
+    const ekskulText = ekskulArray.length > 0 ? ekskulArray.join(", ") : "-";
+
+    // Update preview modal
+    document.getElementById('previewNama').textContent = nama || "-";
+    document.getElementById('previewNisn').textContent = nisn || "-";
+    document.getElementById('previewJk').textContent = jk || "-";
+    document.getElementById('previewSekolah').textContent = sekolah || "-";
+    document.getElementById('previewAlamat').textContent = alamat || "-";
+    document.getElementById('previewEkskul').textContent = ekskulText;
+
+    // Tampilkan modal
+    const modal = document.getElementById('confirmBiodataModal');
+    modal.classList.add('show');
+  }
+
+  function hideConfirmModal() {
+    const modal = document.getElementById('confirmBiodataModal');
+    modal.classList.remove('show');
+  }
+
+  // ==================== SUBMIT DATA KE BACKEND ====================
+  async function submitDataToBackend() {
+    const btnMulai = document.getElementById('btnMulaiTes');
+    
+    // Ambil data dari form
+    const nisn = document.getElementById('nisn').value.trim();
+    const nama = document.getElementById('nama').value.trim();
+    const jk = document.getElementById('jk').value.trim();
+    const sekolah = document.getElementById('sekolah').value.trim();
+    const alamat = document.getElementById('alamat').value.trim();
+    const ekskulArray = Array.from(selectedEkskul);
+
+    // Validasi NISN
+    if (!nisn) {
+      showToast("❌ NISN wajib diisi", "error");
+      return false;
+    }
+
+    // Loading state
+    btnMulai.disabled = true;
+    btnMulai.innerHTML = '<span class="loading-spinner"></span> Menyimpan data...';
 
     const payload = {
       action: "saveBiodata",
       nisn: nisn,
+      nama: nama,
+      jk: jk,
+      sekolah: sekolah,
+      alamat: alamat,
       ekskul: ekskulArray
     };
 
     try {
       console.log("Mengirim data ke backend:", payload);
 
+      // 🔴 FIX 1: Ganti Content-Type dari application/json ke text/plain
+      // untuk menghindari CORS preflight
       const response = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
-        mode: "no-cors",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "text/plain"
         },
         body: JSON.stringify(payload)
       });
 
-      // Karena mode no-cors, response tidak bisa dibaca
-      // Kita asumsikan berhasil jika tidak ada error network
-      console.log("Data terkirim (mode no-cors)");
-      
-      // Simpan data ke localStorage untuk sementara
+      const result = await response.json();
+      console.log("Response backend:", result);
+
+      if (!result.status) {
+        throw new Error(result.message || "Gagal menyimpan biodata");
+      }
+
+      // Simpan data ke localStorage
       localStorage.setItem("biodataSubmitted", "true");
-      localStorage.setItem("namaSiswa", currentStudentData.nama);
+      localStorage.setItem("namaSiswa", result.siswa.nama);
       localStorage.setItem("nisnSiswa", nisn);
-      localStorage.setItem("jkSiswa", currentStudentData.jk);
-      
-      // ID tes sementara
-      const tempId = "TES" + Date.now();
-      localStorage.setItem("idTes", tempId);
+      localStorage.setItem("jkSiswa", result.siswa.jk);
+      localStorage.setItem("idTes", result.idTes);
       
       showToast("✅ Data berhasil disimpan! Mengarahkan ke halaman tes...", "success");
       
@@ -838,12 +865,38 @@
         window.location.href = "testbakat.html";
       }, 1500);
       
+      return true;
+      
     } catch (error) {
       console.error("Error:", error);
-      showToast("❌ Gagal menyimpan data: " + error.message, "error");
+      showToast("❌ " + error.message, "error");
       btnMulai.disabled = false;
-      btnText.innerHTML = originalText;
+      btnMulai.innerHTML = '<span>Mulai Tes</span>\n          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">\n            <path d="M5 12h14M12 5l7 7-7 7"/>\n          </svg>';
+      return false;
     }
+  }
+
+  // ==================== HANDLE MULAI TES ====================
+  async function handleMulaiTes() {
+    // Validasi form
+    if (!validateForm()) {
+      showToast("❌ Lengkapi data diri (Nama, Sekolah, Alamat) terlebih dahulu", "error");
+      return;
+    }
+
+    if (!validateEkskul()) {
+      showToast("❌ Pilih minimal 1 ekstrakurikuler", "error");
+      return;
+    }
+
+    const nisn = document.getElementById('nisn').value.trim();
+    if (!nisn) {
+      showToast("❌ NISN wajib diisi", "error");
+      return;
+    }
+
+    // Tampilkan modal konfirmasi
+    showConfirmModal();
   }
 
   // ==================== CEK TES SUDAH PERNAH DIKERJAKAN ====================
@@ -867,16 +920,6 @@
     return false;
   }
 
-  // ==================== UPDATE SUBMIT BUTTON STATUS ====================
-  function updateSubmitButton() {
-    const btnMulai = document.getElementById('btnMulai');
-    if (isNisnValid && selectedEkskul.size > 0) {
-      btnMulai.disabled = false;
-    } else {
-      btnMulai.disabled = true;
-    }
-  }
-
   // ==================== INIT EKSTRAKURIKULER ====================
   function initEkskulToggle() {
     document.querySelectorAll('.ekskul-item').forEach(item => {
@@ -893,8 +936,6 @@
         if (selectedEkskul.size > 0) {
           document.getElementById('err-ekskul').classList.remove('show');
         }
-        
-        updateSubmitButton();
       });
     });
   }
@@ -903,25 +944,29 @@
   function initEventListeners() {
     document.getElementById("btnCek").addEventListener("click", cekNisn);
     
+    // Tombol Mulai Tes -> tampilkan modal konfirmasi
+    document.getElementById("btnMulaiTes").addEventListener("click", handleMulaiTes);
+    
+    // Modal buttons
+    document.getElementById("confirmSubmitBtn").addEventListener("click", async () => {
+      hideConfirmModal();
+      await submitDataToBackend();
+    });
+    
+    document.getElementById("cancelConfirmBtn").addEventListener("click", hideConfirmModal);
+    
+    // Tutup modal klik di luar area
+    document.getElementById("confirmBiodataModal").addEventListener("click", (e) => {
+      if (e.target === document.getElementById("confirmBiodataModal")) {
+        hideConfirmModal();
+      }
+    });
+    
     const nisnInput = document.getElementById("nisn");
     nisnInput.addEventListener("keypress", function(e) {
       if (e.key === "Enter") {
         cekNisn();
       }
-    });
-
-    document.getElementById("btnMulai").addEventListener("click", function(e) {
-      e.preventDefault();
-      if (validateBeforeConfirm()) {
-        openConfirmModal();
-      }
-    });
-    
-    document.getElementById("cancelConfirmBtn").addEventListener("click", closeConfirmModal);
-    
-    document.getElementById("confirmSubmitBtn").addEventListener("click", function() {
-      closeConfirmModal();
-      mulaiTes();
     });
   }
 
