@@ -61,7 +61,6 @@
     .nav-title strong { display: block; font-size: 12px; font-weight: 800; color: var(--navy); }
     .nav-title span   { font-size: 9.5px; color: var(--blue); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
-    /* Hamburger Menu Button */
     .menu-btn {
       background: none;
       border: none;
@@ -73,9 +72,7 @@
       border-radius: 8px;
       transition: background .2s;
     }
-    .menu-btn:hover {
-      background: var(--blue-lt);
-    }
+    .menu-btn:hover { background: var(--blue-lt); }
     .menu-btn span {
       width: 22px;
       height: 2.5px;
@@ -83,15 +80,9 @@
       border-radius: 2px;
       transition: all .3s ease;
     }
-    .menu-btn.open span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .menu-btn.open span:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-btn.open span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
+    .menu-btn.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .menu-btn.open span:nth-child(2) { opacity: 0; }
+    .menu-btn.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
 
     .progress-bar-wrap {
       background: var(--white);
@@ -103,12 +94,6 @@
       margin-bottom: 8px;
     }
     .progress-meta-left { display: flex; align-items: center; gap: 8px; }
-    .progress-reset {
-      background: none; border: none; cursor: pointer;
-      color: var(--gray-lt); padding: 2px;
-      transition: color .2s;
-    }
-    .progress-reset:hover { color: var(--gray); }
     .progress-label { font-size: 12px; font-weight: 700; color: var(--gray); letter-spacing: .5px; }
     .progress-pct   { font-size: 12px; font-weight: 800; color: var(--blue); }
     .progress-track {
@@ -125,7 +110,6 @@
       padding: 32px 20px;
     }
 
-    /* Question Navigator Overlay (Drawer) */
     .nav-overlay {
       position: fixed;
       inset: 0;
@@ -153,9 +137,7 @@
       flex-direction: column;
       overflow-y: auto;
     }
-    .question-nav-drawer.show {
-      right: 0;
-    }
+    .question-nav-drawer.show { right: 0; }
     .drawer-header {
       padding: 20px 20px 12px;
       border-bottom: 1px solid var(--border);
@@ -163,11 +145,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    .drawer-header h3 {
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--navy);
-    }
+    .drawer-header h3 { font-size: 16px; font-weight: 800; color: var(--navy); }
     .drawer-close {
       background: none;
       border: none;
@@ -211,26 +189,10 @@
       transition: all .18s ease;
       color: var(--gray);
     }
-    .question-number:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      transform: scale(1.02);
-    }
-    .question-number.active {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: white;
-    }
-    .question-number.answered {
-      background: #DCFCE7;
-      border-color: #16A34A;
-      color: #15803D;
-    }
-    .question-number.active.answered {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: white;
-    }
+    .question-number:hover { border-color: var(--blue); color: var(--blue); transform: scale(1.02); }
+    .question-number.active { background: var(--blue); border-color: var(--blue); color: white; }
+    .question-number.answered { background: #DCFCE7; border-color: #16A34A; color: #15803D; }
+    .question-number.active.answered { background: var(--blue); border-color: var(--blue); color: white; }
 
     .question-card {
       background: var(--white);
@@ -240,15 +202,6 @@
       max-width: 480px;
       box-shadow: 0 2px 16px rgba(0,0,0,.06);
       text-align: center;
-    }
-
-    .q-number {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
     }
 
     .q-text {
@@ -327,24 +280,11 @@
       border: 1.5px solid var(--border);
       color: var(--gray);
     }
-    .nav-btn.prev:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
-    .nav-btn.next {
-      background: var(--blue);
-      border: none;
-      color: white;
-    }
-    .nav-btn.next:hover {
-      background: var(--blue-dk);
-    }
-    .nav-btn.submit {
-      background: var(--green);
-    }
-    .nav-btn.submit:hover {
-      background: #0d9488;
-    }
+    .nav-btn.prev:hover { border-color: var(--blue); color: var(--blue); }
+    .nav-btn.next { background: var(--blue); border: none; color: white; }
+    .nav-btn.next:hover { background: var(--blue-dk); }
+    .nav-btn.submit { background: var(--green); }
+    .nav-btn.submit:hover { background: #0d9488; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -409,7 +349,6 @@
       to { opacity: 1; transform: translateX(0); }
     }
 
-    /* LOADING SCREEN */
     .loading-overlay {
       position: fixed;
       inset: 0;
@@ -426,7 +365,6 @@
       opacity: 0;
       pointer-events: none;
     }
-
     .loading-spinner-lg {
       width: 58px;
       height: 58px;
@@ -436,30 +374,14 @@
       animation: spin 0.8s linear infinite;
       margin-bottom: 18px;
     }
-
-    .loading-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: #0F172A;
-      margin-bottom: 6px;
-    }
-
-    .loading-desc {
-      font-size: 13px;
-      color: #64748B;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Animasi untuk pindah soal */
+    .loading-title { font-size: 16px; font-weight: 800; color: #0F172A; margin-bottom: 6px; }
+    .loading-desc { font-size: 13px; color: #64748B; }
+    @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes cardIn { 
       from { opacity:0; transform:translateY(12px) scale(.98); } 
       to { opacity:1; transform:translateY(0) scale(1); } 
     }
 
-    /* MODAL KONFIRMASI */
     .confirm-overlay {
       position: fixed;
       inset: 0;
@@ -471,11 +393,7 @@
       z-index: 99999;
       padding: 20px;
     }
-
-    .confirm-overlay.show {
-      display: flex;
-    }
-
+    .confirm-overlay.show { display: flex; }
     .confirm-box {
       width: 100%;
       max-width: 420px;
@@ -485,18 +403,10 @@
       text-align: center;
       animation: modalIn .22s ease;
     }
-
     @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px) scale(.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(12px) scale(.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
-
     .confirm-icon {
       width: 72px;
       height: 72px;
@@ -508,26 +418,9 @@
       justify-content: center;
       font-size: 34px;
     }
-
-    .confirm-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 10px;
-    }
-
-    .confirm-desc {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--gray);
-      margin-bottom: 24px;
-    }
-
-    .confirm-actions {
-      display: flex;
-      gap: 12px;
-    }
-
+    .confirm-title { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 10px; }
+    .confirm-desc { font-size: 14px; line-height: 1.6; color: var(--gray); margin-bottom: 24px; }
+    .confirm-actions { display: flex; gap: 12px; }
     .confirm-btn {
       flex: 1;
       border: none;
@@ -539,29 +432,14 @@
       cursor: pointer;
       transition: .2s;
     }
-
-    .confirm-btn.cancel {
-      background: #F1F5F9;
-      color: var(--gray);
-    }
-
-    .confirm-btn.cancel:hover {
-      background: #E2E8F0;
-    }
-
-    .confirm-btn.submit {
-      background: var(--blue);
-      color: white;
-    }
-
-    .confirm-btn.submit:hover {
-      background: var(--blue-dk);
-    }
+    .confirm-btn.cancel { background: #F1F5F9; color: var(--gray); }
+    .confirm-btn.cancel:hover { background: #E2E8F0; }
+    .confirm-btn.submit { background: var(--blue); color: white; }
+    .confirm-btn.submit:hover { background: var(--blue-dk); }
   </style>
 </head>
 <body>
 
-<!-- LOADING SCREEN -->
 <div class="loading-overlay" id="pageLoader">
   <div class="loading-spinner-lg"></div>
   <div class="loading-title">Memuat Soal Tes...</div>
@@ -585,10 +463,8 @@
   </button>
 </nav>
 
-<!-- Overlay untuk menutup drawer -->
 <div class="nav-overlay" id="navOverlay"></div>
 
-<!-- Drawer Navigator Soal -->
 <div class="question-nav-drawer" id="questionDrawer">
   <div class="drawer-header">
     <h3>Navigasi Soal</h3>
@@ -616,9 +492,8 @@
 
 <main id="question-area">
   <div class="question-card" id="question-card">
-    <div class="q-number" id="questionNumber">Soal 1 / 104</div>
-    <p class="q-text" id="questionText">Memuat soal dari database...</p>
-    <div class="answer-group">
+    <p class="q-text" id="q-text">Memuat soal dari database...</p>
+    <div class="answer-group" id="answer-group">
       <button class="answer-btn btn-positive" id="btn-positive">
         <div class="icon-wrap">
           <svg width="26" height="26" fill="none" stroke="#16A34A" stroke-width="2.5" viewBox="0 0 24 24">
@@ -626,7 +501,7 @@
             <path d="M8 12l3 3 5-5"/>
           </svg>
         </div>
-        <span class="btn-label">Setuju / Suka</span>
+        <span class="btn-label" id="positive-label">Setuju</span>
       </button>
       <button class="answer-btn btn-negative" id="btn-negative">
         <div class="icon-wrap">
@@ -635,7 +510,7 @@
             <path d="M15 9l-6 6M9 9l6 6"/>
           </svg>
         </div>
-        <span class="btn-label">Tidak Setuju / Tidak Suka</span>
+        <span class="btn-label" id="negative-label">Tidak Setuju</span>
       </button>
     </div>
     <div class="nav-buttons">
@@ -648,20 +523,16 @@
 <div id="done-screen">
   <div class="done-icon">🎉</div>
   <h2 class="done-title">Tes Selesai!</h2>
-  <p class="done-sub">Terima kasih telah menyelesaikan tes bakat dan minat.</p>
+  <p class="done-sub">Terima kasih telah menyelesaikan tes RIASEC.</p>
   <div class="score-grid" id="score-grid"></div>
-  <button class="btn-dashboard" id="goDashboardBtn">Kembali ke Dashboard</button>
+  <button class="btn-dashboard" onclick="goDashboard()">Kembali ke Dashboard</button>
 </div>
 
 <footer>
   <p>© 2026 SMKN 3 SOPPENG</p>
   <p style="margin-top:2px;">
     Develop by 
-    <a 
-      href="https://www.instagram.com/scoyamm812" 
-      target="_blank"
-      style="color:#2563EB; text-decoration:none; font-weight:600;"
-    >
+    <a href="https://www.instagram.com/scoyamm812" target="_blank" style="color:#2563EB; text-decoration:none; font-weight:600;">
       @scoyamm812
     </a>
   </p>
@@ -669,15 +540,11 @@
 
 <div id="toast" class="toast"></div>
 
-<!-- MODAL KONFIRMASI SUBMIT -->
 <div class="confirm-overlay" id="confirmModal">
   <div class="confirm-box">
     <div class="confirm-icon">📝</div>
     <div class="confirm-title">Selesaikan Tes?</div>
-    <div class="confirm-desc">
-      Pastikan semua jawaban sudah benar.<br>
-      Jawaban yang telah dikirim tidak dapat diubah kembali.
-    </div>
+    <div class="confirm-desc">Pastikan semua jawaban sudah benar.<br>Jawaban yang telah dikirim tidak dapat diubah kembali.</div>
     <div class="confirm-actions">
       <button class="confirm-btn cancel" id="cancelConfirmBtn">Batal</button>
       <button class="confirm-btn submit" id="confirmSubmitBtn">Ya, Selesaikan</button>
@@ -687,23 +554,26 @@
 
 <script>
 // ==================== KONFIGURASI ====================
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzmCnxUzQWFP63T9J8oDHfJtvYEHfj79_JUVtsr87n644KpEDaUrRgSjV5QMvR7YCKqiw/exec";
+// ⚠️ GANTI URL INI DENGAN URL APPS SCRIPT HASIL DEPLOY TERBARU! ⚠️
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzsavrEPPh5dZkobc8UGOXu2QHrKN_x-7agKIJM5z13v85Vr2ekX6h0MkL8YwjTTtPuAA/exec";
 
 // ==================== GLOBAL VARIABLES ====================
-let questions = [];        // Array soal { id_soal, soal, tipe, bagian }
+let allQuestions = [];
 let currentIndex = 0;
-let userAnswers = {};      // Key = id_soal asli, Value = 1 (setuju) / 0 (tidak)
+let userAnswers = {};
 let totalQuestions = 0;
-let idTes = "";
+let dataLoaded = false;
+let jurusanData = [];
 
-// ==================== SHUFFLE FUNCTION (FISHER-YATES) ====================
-function shuffleArray(array) {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+// ==================== LOADING HELPER ====================
+function hideLoader() {
+  const loader = document.getElementById("pageLoader");
+  if (loader) {
+    loader.classList.add("hide");
+    setTimeout(() => {
+      loader.style.display = "none";
+    }, 300);
   }
-  return shuffled;
 }
 
 // ==================== HELPER FUNCTIONS ====================
@@ -716,23 +586,18 @@ function showToast(message, isError = false) {
   }, 3000);
 }
 
-function showLoading(message = "Menyimpan Jawaban...") {
-  const loader = document.getElementById("pageLoader");
-  const title = document.querySelector("#pageLoader .loading-title");
-  const desc = document.querySelector("#pageLoader .loading-desc");
-  if (title) title.textContent = message;
-  if (desc) desc.textContent = "Mohon tunggu, sedang diproses";
-  loader.style.display = "flex";
-  loader.classList.remove("hide");
-}
-
-function hideLoader() {
-  const loader = document.getElementById("pageLoader");
-  if (loader) {
-    loader.classList.add("hide");
-    setTimeout(() => {
-      loader.style.display = "none";
-    }, 300);
+function getAnswerOptions(bagian) {
+  const bagianLower = String(bagian).toLowerCase().trim();
+  if (bagianLower === "minat") {
+    return {
+      positive: { value: "S", label: "Suka" },
+      negative: { value: "TS", label: "Tidak Suka" }
+    };
+  } else {
+    return {
+      positive: { value: "Y", label: "Ya" },
+      negative: { value: "T", label: "Tidak" }
+    };
   }
 }
 
@@ -757,92 +622,164 @@ function closeDrawer() {
   menuBtn.classList.remove("open");
 }
 
-// ==================== RENDER NAVIGATOR ====================
-function renderNavigator() {
-  const navContainer = document.getElementById("questionNav");
-  if (!navContainer) return;
-  
-  navContainer.innerHTML = "";
-  
-  for (let i = 0; i < totalQuestions; i++) {
-    const question = questions[i];
-    const btn = document.createElement("button");
-    btn.textContent = i + 1;
-    btn.className = "question-number";
-    
-    if (userAnswers[question.id_soal] !== undefined) {
-      btn.classList.add("answered");
-    }
-    
-    if (i === currentIndex) {
-      btn.classList.add("active");
-    }
-    
-    btn.addEventListener("click", () => {
-      currentIndex = i;
-      renderCurrentQuestion();
-      animateCard();
-      closeDrawer();
-    });
-    
-    navContainer.appendChild(btn);
-  }
-}
-
-// ==================== ANIMASI KARTU ====================
-function animateCard() {
+// ==================== ANIMASI KARTU SAAT PINDAH SOAL ====================
+function animateQuestionCard() {
   const card = document.getElementById('question-card');
   card.style.animation = 'none';
   void card.offsetHeight;
   card.style.animation = 'cardIn .25s ease both';
 }
 
-// ==================== UPDATE PROGRESS ====================
-function updateProgress() {
-  const answeredCount = Object.keys(userAnswers).length;
-  const percent = (answeredCount / totalQuestions) * 100;
-  const fill = document.getElementById('prog-fill');
-  const pct = document.getElementById('prog-pct');
-  const label = document.getElementById('prog-label');
-  
-  if (fill) fill.style.width = `${percent}%`;
-  if (pct) pct.textContent = `${Math.round(percent)}% SELESAI`;
-  if (label) label.textContent = `PERTANYAAN ${currentIndex + 1} / ${totalQuestions}`;
-  
-  const nextBtn = document.getElementById('nextBtn');
-  if (nextBtn) {
-    if (currentIndex === totalQuestions - 1) {
-      nextBtn.textContent = '✅ Selesai';
-      nextBtn.classList.add('submit');
-    } else {
-      nextBtn.textContent = 'Selanjutnya ▶';
-      nextBtn.classList.remove('submit');
+// ==================== MODAL KONFIRMASI ====================
+function openConfirmModal() {
+  document.getElementById("confirmModal").classList.add("show");
+}
+
+function closeConfirmModal() {
+  document.getElementById("confirmModal").classList.remove("show");
+}
+
+// ==================== RENDER QUESTION NAVIGATOR ====================
+function renderQuestionNavigator() {
+  const nav = document.getElementById("questionNav");
+
+  if (!nav || totalQuestions === 0) return;
+
+  nav.innerHTML = "";
+
+  allQuestions.forEach((q, index) => {
+    const btn = document.createElement("button");
+
+    btn.className = "question-number";
+    btn.textContent = index + 1;
+
+    const answered = userAnswers[q.id_soal];
+
+    if (answered) {
+      btn.classList.add("answered");
     }
+
+    if (index === currentIndex) {
+      btn.classList.add("active");
+    }
+
+    btn.addEventListener("click", () => {
+      currentIndex = index;
+      renderCurrentQuestion();
+      animateQuestionCard();
+      closeDrawer();
+    });
+
+    nav.appendChild(btn);
+  });
+}
+
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// ==================== AMBIL JURUSAN ====================
+async function loadJurusan() {
+  jurusanData = [
+    { kode: "RIC", jurusan: "TJKT" }, { kode: "RCI", jurusan: "TJKT" },
+    { kode: "IRC", jurusan: "TJKT" }, { kode: "ICR", jurusan: "TJKT" },
+    { kode: "CRI", jurusan: "TJKT" }, { kode: "CIR", jurusan: "TJKT" },
+    { kode: "RIE", jurusan: "TITL" }, { kode: "IRE", jurusan: "TITL" },
+    { kode: "IER", jurusan: "TITL" }, { kode: "ERI", jurusan: "TITL" },
+    { kode: "EIR", jurusan: "TITL" }, { kode: "REC", jurusan: "TITL" },
+    { kode: "RCE", jurusan: "TITL" }, { kode: "RIS", jurusan: "TPTUP" },
+    { kode: "RSI", jurusan: "TPTUP" }, { kode: "IRS", jurusan: "TPTUP" },
+    { kode: "ISR", jurusan: "TPTUP" }, { kode: "SRI", jurusan: "TPTUP" },
+    { kode: "SIR", jurusan: "TPTUP" }, { kode: "RES", jurusan: "TPTUP" },
+    { kode: "RSE", jurusan: "TPTUP" }, { kode: "AIE", jurusan: "DKV" },
+    { kode: "AEI", jurusan: "DKV" }, { kode: "IAE", jurusan: "DKV" },
+    { kode: "IEA", jurusan: "DKV" }, { kode: "EAI", jurusan: "DKV" },
+    { kode: "EIA", jurusan: "DKV" }, { kode: "AIS", jurusan: "DKV" },
+    { kode: "ASI", jurusan: "DKV" }, { kode: "ARI", jurusan: "DKV" },
+    { kode: "AIR", jurusan: "DKV" }, { kode: "ASE", jurusan: "DKV" },
+    { kode: "AES", jurusan: "DKV" }, { kode: "ASC", jurusan: "DKV" },
+    { kode: "ACS", jurusan: "DKV" }, { kode: "ARS", jurusan: "DKV" },
+    { kode: "ASR", jurusan: "DKV" },
+  ];
+  console.log("Data jurusan dimuat dari lokal:", jurusanData.length, "entri");
+  return true;
+}
+
+// ==================== AMBIL SOAL ====================
+async function loadQuestions() {
+  try {
+    showToast("Mengambil soal dari database...", false);
+    
+    const response = await fetch(`${APPS_SCRIPT_URL}?action=getQuestions&t=${Date.now()}`);
+    const data = await response.json();
+    
+    console.log("Data dari Apps Script:", data);
+    
+    let questionsArray = [];
+    if (data.status && Array.isArray(data.data)) {
+      questionsArray = data.data;
+    } else if (Array.isArray(data)) {
+      questionsArray = data;
+    }
+    
+    if (questionsArray.length === 0) {
+      throw new Error("Tidak ada soal yang ditemukan di database");
+    }
+    
+    allQuestions = questionsArray.map(q => ({
+      id_soal: q.id_soal,
+      bagian: (q.bagian || "bakat").toLowerCase().trim(),
+      tipe: (q.tipe || "").toUpperCase().trim(),
+      pertanyaan: q.soal || q.pertanyaan || q.text || ""
+    })).filter(q => q.pertanyaan && q.tipe);
+    
+    allQuestions = shuffleArray(allQuestions);
+    totalQuestions = allQuestions.length;
+    
+    console.log(`Berhasil memuat ${totalQuestions} soal`);
+    showToast(`${totalQuestions} soal dimuat, silakan mulai tes`, false);
+    
+    dataLoaded = true;
+    
+    document.getElementById('prog-label').textContent = `PERTANYAAN 1 / ${totalQuestions}`;
+    
+    renderQuestionNavigator();
+    renderCurrentQuestion();
+    hideLoader();
+    
+  } catch (error) {
+    console.error("Gagal memuat soal:", error);
+    showToast("Gagal memuat soal. Periksa koneksi internet.", true);
+    document.getElementById('q-text').textContent = "Gagal memuat soal. Silakan refresh halaman.";
+    hideLoader();
   }
 }
 
 // ==================== RENDER SOAL ====================
 function renderCurrentQuestion() {
-  if (!questions.length || currentIndex >= totalQuestions) return;
+  if (!dataLoaded || allQuestions.length === 0) return;
   
-  const q = questions[currentIndex];
-  const questionNumber = document.getElementById('questionNumber');
-  const questionText = document.getElementById('questionText');
+  const q = allQuestions[currentIndex];
+  const options = getAnswerOptions(q.bagian);
+  const currentAnswer = userAnswers[q.id_soal];
+  
+  document.getElementById('q-text').textContent = q.pertanyaan;
+  
+  document.getElementById('positive-label').textContent = options.positive.label;
+  document.getElementById('negative-label').textContent = options.negative.label;
+  
   const positiveBtn = document.getElementById('btn-positive');
   const negativeBtn = document.getElementById('btn-negative');
   
-  if (questionNumber) {
-    questionNumber.textContent = `Soal ${currentIndex + 1} / ${totalQuestions}`;
-  }
-  if (questionText) {
-    questionText.textContent = q.soal || q.pertanyaan || "";
-  }
-  
-  const currentAnswer = userAnswers[q.id_soal];
-  if (currentAnswer === 1) {
+  if (currentAnswer === options.positive.value) {
     positiveBtn.classList.add('active');
     negativeBtn.classList.remove('active');
-  } else if (currentAnswer === 0) {
+  } else if (currentAnswer === options.negative.value) {
     negativeBtn.classList.add('active');
     positiveBtn.classList.remove('active');
   } else {
@@ -850,192 +787,197 @@ function renderCurrentQuestion() {
     negativeBtn.classList.remove('active');
   }
   
-  updateProgress();
-  renderNavigator();
+  const progress = ((currentIndex + 1) / totalQuestions) * 100;
+  document.getElementById('prog-fill').style.width = `${progress}%`;
+  document.getElementById('prog-pct').textContent = `${Math.round(progress)}% SELESAI`;
+  document.getElementById('prog-label').textContent = `PERTANYAAN ${currentIndex + 1} / ${totalQuestions}`;
+  
+  const nextBtn = document.getElementById('nextBtn');
+  if (currentIndex === totalQuestions - 1) {
+    nextBtn.textContent = '✅ Selesai';
+    nextBtn.classList.add('submit');
+  } else {
+    nextBtn.textContent = 'Selanjutnya ▶';
+    nextBtn.classList.remove('submit');
+  }
+  
+  renderQuestionNavigator();
 }
 
-// ==================== JAWAB SOAL ====================
-function answerQuestion(value) {
-  const currentQuestion = questions[currentIndex];
-  userAnswers[currentQuestion.id_soal] = value;
+// ==================== MENYIMPAN JAWABAN ====================
+function answer(choice) {
+  const q = allQuestions[currentIndex];
+  const options = getAnswerOptions(q.bagian);
   
-  const positiveBtn = document.getElementById('btn-positive');
-  const negativeBtn = document.getElementById('btn-negative');
-  
-  if (value === 1) {
-    positiveBtn.classList.add('active');
-    negativeBtn.classList.remove('active');
-  } else {
-    negativeBtn.classList.add('active');
-    positiveBtn.classList.remove('active');
+  let selectedValue = null;
+  if (choice === 'positive') {
+    selectedValue = options.positive.value;
+  } else if (choice === 'negative') {
+    selectedValue = options.negative.value;
   }
   
-  renderNavigator();
-  updateProgress();
+  if (selectedValue) {
+    userAnswers[q.id_soal] = selectedValue;
+    renderCurrentQuestion();
+  }
 }
 
 // ==================== NAVIGASI ====================
 function nextQuestion() {
-  const currentQuestion = questions[currentIndex];
-  const currentAnswer = userAnswers[currentQuestion.id_soal];
-  
-  if (currentAnswer === undefined) {
+  const q = allQuestions[currentIndex];
+  const options = getAnswerOptions(q.bagian);
+
+  const hasAnswered =
+    userAnswers[q.id_soal] === options.positive.value ||
+    userAnswers[q.id_soal] === options.negative.value;
+
+  if (!hasAnswered) {
     showToast("Silakan jawab pertanyaan terlebih dahulu", true);
     return;
   }
-  
+
   if (currentIndex === totalQuestions - 1) {
-    const unansweredCount = totalQuestions - Object.keys(userAnswers).length;
-    if (unansweredCount > 0) {
-      showToast(`Masih ada ${unansweredCount} soal yang belum dijawab`, true);
+    const unanswered = allQuestions.filter(question => {
+      const ans = userAnswers[question.id_soal];
+      const opt = getAnswerOptions(question.bagian);
+      return !(ans === opt.positive.value || ans === opt.negative.value);
+    });
+
+    if (unanswered.length > 0) {
+      const firstUnanswered = unanswered[0];
+      const targetIndex = allQuestions.findIndex(
+        q => q.id_soal === firstUnanswered.id_soal
+      );
+
+      currentIndex = targetIndex;
+      renderCurrentQuestion();
+      animateQuestionCard();
+
+      showToast(`Masih ada ${unanswered.length} soal yang belum dijawab`, true);
       return;
     }
-    document.getElementById('confirmModal').classList.add('show');
-    return;
+
+    openConfirmModal();
+
+  } else {
+    currentIndex++;
+    renderCurrentQuestion();
+    animateQuestionCard();
   }
-  
-  currentIndex++;
-  renderCurrentQuestion();
-  animateCard();
 }
 
 function prevQuestion() {
   if (currentIndex > 0) {
     currentIndex--;
     renderCurrentQuestion();
-    animateCard();
+    animateQuestionCard();
   }
 }
 
-// ==================== SUBMIT JAWABAN KE BACKEND ====================
-async function submitAnswers() {
-  document.getElementById('confirmModal').classList.remove('show');
-  showLoading("Menyimpan Jawaban...");
+// ==================== MENGHITUNG SKOR ====================
+function calculateScores() {
+  const scores = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
   
-  // Format jawaban sesuai yang diharapkan backend: { "Q1": 1, "Q2": 0, ... }
-  const answers = {};
-  for (let i = 0; i < questions.length; i++) {
-    const q = questions[i];
-    const answerValue = userAnswers[q.id_soal];
-    answers[`Q${q.id_soal}`] = (answerValue === 1) ? 1 : 0;
+  for (const q of allQuestions) {
+    const answer = userAnswers[q.id_soal];
+    if (!answer) continue;
+    
+    const isPositive = (answer === "S" || answer === "Y");
+    if (isPositive && q.tipe) {
+      const tipe = q.tipe.toUpperCase();
+      if (scores[tipe] !== undefined) {
+        scores[tipe]++;
+      }
+    }
   }
   
+  return scores;
+}
+
+function getJurusanFromCode(code) {
+  const found = jurusanData.find(item => item.kode === code);
+  return found ? found.jurusan : "Belum ada rekomendasi";
+}
+
+// ==================== SUBMIT TES (DIPERBAIKI) ====================
+async function submitTest() {
+  const scores = calculateScores();
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  
+  const kode3 = sorted.slice(0, 3).map(item => item[0]).join("");
+  const rekomendasiJurusan = getJurusanFromCode(kode3);
+  
+  const idTes = localStorage.getItem("idTes") || "";
+  
+  console.log("🔍 Debug - idTes:", idTes);
+  console.log("🔍 Debug - scores:", scores);
+  
+  // Tampilkan layar selesai
+  document.getElementById('progress-wrap').style.display = 'none';
+  document.getElementById('question-area').style.display = 'none';
+  const doneScreen = document.getElementById('done-screen');
+  doneScreen.classList.add('show');
+  
+  const grid = document.getElementById('score-grid');
+  grid.innerHTML = sorted.map(([letter, score]) => `
+    <div class="score-item ${score === sorted[0][1] ? 'top' : ''}">
+      <div class="score-letter">${letter}</div>
+      <div class="score-num">${score} poin</div>
+    </div>
+  `).join('');
+  
+  // Format jawaban Q1-Q104 (semua 104 soal)
+  const answersFormatted = {};
+  for (let i = 1; i <= 104; i++) {
+    answersFormatted["Q" + i] = 0;
+  }
+  
+  allQuestions.forEach(q => {
+    const idx = q.id_soal;
+    const val = userAnswers[q.id_soal];
+    // Konversi: Y atau S = 1 (positif), T atau TS = 0 (negatif)
+    answersFormatted["Q" + idx] = (val === "Y" || val === "S") ? 1 : 0;
+  });
+
   const payload = {
     action: "saveAnswers",
     idTes: idTes,
-    answers: answers
+    answers: answersFormatted
   };
   
+  console.log("🔍 Debug - payload:", payload);
+  
   try {
-    console.log("Mengirim jawaban ke backend...");
-    console.log("Payload:", payload);
-    
+    // 🔴 PERUBAHAN: Gunakan text/plain untuk hindari CORS preflight
     const response = await fetch(APPS_SCRIPT_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "text/plain" },
       body: JSON.stringify(payload)
     });
     
     const result = await response.json();
-    console.log("Response submit:", result);
+    console.log("✅ Response server:", result);
     
     if (result.status === true) {
-      // Sembunyikan area soal, tampilkan hasil
-      document.getElementById('progress-wrap').style.display = 'none';
-      document.getElementById('question-area').style.display = 'none';
-      
-      const doneScreen = document.getElementById('done-screen');
-      doneScreen.classList.add('show');
-      
-      // Tampilkan skor
-      const scores = result.result;
-      const scoreGrid = document.getElementById('score-grid');
-      const sorted = [
-        { letter: 'R', score: scores.R },
-        { letter: 'I', score: scores.I },
-        { letter: 'A', score: scores.A },
-        { letter: 'S', score: scores.S },
-        { letter: 'E', score: scores.E },
-        { letter: 'C', score: scores.C }
-      ].sort((a, b) => b.score - a.score);
-      
-      scoreGrid.innerHTML = sorted.map(item => `
-        <div class="score-item ${item.score === sorted[0].score ? 'top' : ''}">
-          <div class="score-letter">${item.letter}</div>
-          <div class="score-num">${item.score} poin</div>
-        </div>
-      `).join('');
-      
-      // Hapus rekomendasi lama jika ada
-      const oldRekomendasi = doneScreen.querySelector('.rekomendasi-jurusan');
-      if (oldRekomendasi) oldRekomendasi.remove();
-      
-      // Tampilkan rekomendasi jurusan
-      const rekomendasi = document.createElement('p');
-      rekomendasi.className = 'rekomendasi-jurusan';
-      rekomendasi.style.marginTop = '16px';
-      rekomendasi.style.fontSize = '14px';
-      rekomendasi.style.fontWeight = '700';
-      rekomendasi.style.color = '#2563EB';
-      rekomendasi.innerHTML = `🎯 Rekomendasi Jurusan: <strong>${scores.hasil || 'TJKT'}</strong>`;
-      doneScreen.appendChild(rekomendasi);
-      
       localStorage.setItem("tesSelesai", "true");
-      showToast("✅ Jawaban berhasil disimpan!", false);
+      showToast("Hasil tes berhasil disimpan!", false);
     } else {
-      throw new Error(result.message || "Gagal menyimpan jawaban");
+      throw new Error(result.message || "Gagal menyimpan");
     }
-    
   } catch (error) {
-    console.error("Error:", error);
-    showToast("❌ " + error.message, true);
-  } finally {
-    hideLoader();
+    console.error("❌ Error detail:", error);
+    showToast("Hasil tes tersimpan secara lokal, tetapi gagal sinkronisasi ke server.", true);
+    localStorage.setItem("tesSelesai", "true");
   }
 }
 
-// ==================== LOAD SOAL DARI BACKEND ====================
-async function loadQuestions() {
-  try {
-    console.log("Mengambil soal dari server...");
-    
-    const response = await fetch(`${APPS_SCRIPT_URL}?action=getQuestions&t=${Date.now()}`);
-    const result = await response.json();
-    
-    console.log("Response soal:", result);
-    
-    if (!result.status) {
-      throw new Error(result.message || "Gagal mengambil soal");
-    }
-    
-    const originalQuestions = result.data;
-    questions = shuffleArray(originalQuestions);
-    totalQuestions = questions.length;
-    
-    console.log(`✅ ${totalQuestions} soal berhasil dimuat dan diacak`);
-    
-    userAnswers = {};
-    currentIndex = 0;
-    
-    renderCurrentQuestion();
-    hideLoader();
-    
-  } catch (error) {
-    console.error("Gagal memuat soal:", error);
-    showToast("❌ Gagal memuat soal. Periksa koneksi internet.", true);
-    document.getElementById('questionText').textContent = "Gagal memuat soal. Silakan refresh halaman.";
-    hideLoader();
-  }
+function goDashboard() {
+  window.location.href = "index.html";
 }
 
-// ==================== CEK SESSION ====================
-function checkSession() {
-  idTes = localStorage.getItem("idTes");
-  
-  if (!idTes) {
-    alert("Session tidak ditemukan. Silakan isi biodata terlebih dahulu.");
+function checkBiodataAndInit() {
+  if (localStorage.getItem("biodataSubmitted") !== "true") {
+    alert("Silakan isi biodata terlebih dahulu!");
     window.location.href = "biodata.html";
     return false;
   }
@@ -1052,45 +994,33 @@ function checkSession() {
     return false;
   }
   
-  if (localStorage.getItem("biodataSubmitted") !== "true") {
-    alert("Silakan isi biodata terlebih dahulu!");
-    window.location.href = "biodata.html";
-    return false;
-  }
-  
   return true;
-}
-
-// ==================== GO DASHBOARD ====================
-function goDashboard() {
-  window.location.href = "index.html";
 }
 
 // ==================== EVENT LISTENERS ====================
 function initEventListeners() {
-  document.getElementById("btn-positive").addEventListener("click", () => answerQuestion(1));
-  document.getElementById("btn-negative").addEventListener("click", () => answerQuestion(0));
-  document.getElementById("prevBtn").addEventListener("click", prevQuestion);
-  document.getElementById("nextBtn").addEventListener("click", nextQuestion);
   document.getElementById("menuBtn").addEventListener("click", openDrawer);
   document.getElementById("closeDrawerBtn").addEventListener("click", closeDrawer);
   document.getElementById("navOverlay").addEventListener("click", closeDrawer);
-  document.getElementById("cancelConfirmBtn").addEventListener("click", () => {
-    document.getElementById('confirmModal').classList.remove('show');
+  document.getElementById("prevBtn").addEventListener("click", prevQuestion);
+  document.getElementById("nextBtn").addEventListener("click", nextQuestion);
+  document.getElementById("btn-positive").addEventListener("click", () => answer('positive'));
+  document.getElementById("btn-negative").addEventListener("click", () => answer('negative'));
+  document.getElementById("cancelConfirmBtn").addEventListener("click", closeConfirmModal);
+  document.getElementById("confirmSubmitBtn").addEventListener("click", () => {
+    closeConfirmModal();
+    submitTest();
   });
-  document.getElementById("confirmSubmitBtn").addEventListener("click", submitAnswers);
-  document.getElementById("goDashboardBtn").addEventListener("click", goDashboard);
 }
 
-// ==================== INITIALISASI ====================
-async function init() {
-  if (!checkSession()) return;
-  
+// ==================== INISIALISASI ====================
+if (checkBiodataAndInit()) {
   initEventListeners();
-  await loadQuestions();
+  (async () => {
+    await loadJurusan();
+    await loadQuestions();
+  })();
 }
-
-init();
 </script>
 </body>
 </html>
